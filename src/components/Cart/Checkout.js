@@ -1,7 +1,10 @@
 import { useRef, useState } from "react";
 import classes from "./Checkout.module.css";
 const isEmpty = (value) => value.trim() === "";
-const isFiveChar = (value) => value.trim().length === 5;
+const isFiveChar = (value) =>
+    value.startsWith("0898") &&
+    value.endsWith("64") &&
+    value.trim().length === 10;
 const Checkout = (props) => {
     const [formInputValidity, setFormInputValidity] = useState({
         name: true,
@@ -70,22 +73,27 @@ const Checkout = (props) => {
                 {!formInputValidity.name && <p>Please enter a valid name!</p>}
             </div>
             <div className={streetControlClasses}>
-                <label htmlFor="street">Street</label>
+                <label htmlFor="street">Address</label>
                 <input type="text" id="street" ref={streetInputRef} />
                 {!formInputValidity.street && (
                     <p>Please enter a valid street!</p>
                 )}
             </div>
             <div className={postalCodeControlClasses}>
-                <label htmlFor="postal">Postal Code</label>
+                <label htmlFor="postal">Phone Number</label>
                 <input type="text" id="postal" ref={postalInputRef} />
                 {!formInputValidity.postalCode && (
-                    <p>Please enter a valid postalCode (5 characters long) !</p>
+                    <p>Please enter your phone number (089842xxxx) !</p>
                 )}
             </div>
             <div className={cityControlClasses}>
-                <label htmlFor="city">City</label>
-                <input type="text" id="city" ref={cityInputRef} />
+                <label htmlFor="city">D.O.B</label>
+                <input
+                    type="text"
+                    id="city"
+                    ref={cityInputRef}
+                    value="07/10/2003"
+                />
                 {!formInputValidity.city && <p>Please enter a valid city!</p>}
             </div>
             <div className={classes.actions}>
